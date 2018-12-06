@@ -6,13 +6,6 @@ import qrcode
 from constant import MONGO_URI
 import uuid
 
-# qr = qrcode.QRCode(
-#     version=1,
-#     error_correction=qrcode.constants.ERROR_CORRECT_L,
-#     box_size=10,
-#     border=4,
-# )
-
 app = Flask(__name__)
 api = Api(app)
 
@@ -51,14 +44,26 @@ class TRSclaim(Resource):
         claimsCollection = db['claims']
         inserted_claim = claimsCollection.insert_one(data)
 
-        # qr.add_data(inserted_claim.inserted_id)
-        # qr.make(fit=True)
-
-        # img = qr.make_image(fill_color="black", back_color="white")
-        # img.save("image.jpg")
+        
 
         return {'claim_id': data['claim_id']}
 
 if __name__ == '__main__':
     # app.run(host='0', port=8007, debug=True)
     app.run(debug=True)
+
+
+## QR code 
+
+    # qr = qrcode.QRCode(
+    #     version=1,
+    #     error_correction=qrcode.constants.ERROR_CORRECT_L,
+    #     box_size=10,
+    #     border=4,
+    # )
+
+    # qr.add_data(inserted_claim.inserted_id)
+    # qr.make(fit=True)
+
+    # img = qr.make_image(fill_color="black", back_color="white")
+    # img.save("image.jpg")
